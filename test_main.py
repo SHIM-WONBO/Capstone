@@ -1,7 +1,6 @@
 from __future__ import division
 import sys
-from pyzbar import pyzbar
-# import pyzbar.pyzbar as pyzbar
+import pyzbar.pyzbar as pyzbar
 import cv2
 import libs.bar as bar
 import time
@@ -22,17 +21,18 @@ host = '192.168.0.32', # host name
 )
 
 
-a = 0
-b = 0
-c = 0
-d = 0
-e = 0
-f = 0
-inx = 1
+
+a = None
+b = None
+c = None
+d = None
+e = None
+f = None
 
 
 BAR = bar.Baread()
 db = data.db()
+
 # MO_a = con_A.CON_A()
 # MO_b = con_B.CON_B()
 
@@ -40,8 +40,15 @@ db = data.db()
 
 def barcode_read():
 
-    global a,b,c,d,e,f,inx
-    print("'R' : 데이터 리셋 및 프로그램 종료 \n'S' : 데이터 저장 및 프로그램 종료")
+    global a,b,c,d,e,f
+
+    # if __name__ == '__main__':
+
+    #     ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+
+    #     ser.flush()
+
+    print("'1' : 초기화 (오류 발생 시)\n'2' : 초기화 및 프로그램 종료 \n'3' : 저장 및 프로그램 종료")
 
     while True:
 
@@ -49,69 +56,101 @@ def barcode_read():
 
         bar_data = BAR.baread()       
         
-        if bar_data == "hadong":               
-              
-            a += 1
-            db.num(inx,a,b,c,d,e,f)
-            db.area(inx, bar_data)
-            inx += 1
-            # MO_a.hadong()
 
-            
+
+        if bar_data == "yeonmudong":
+            # ser.write(b'yeonmudong')
+
+            # if ser.in_waiting > 0:
+
+            #     line = ser.readline().decode('utf-8').rstrip()
+
+            #     #print(line)   
+
+            a,b,c,d,e,f = db.num_r()
+            a += 1
+            db.num_w(a,b,c,d,e,f)
+            db.area(bar_data)
+            # MO_b.yeonmudong()
+
+
+        elif bar_data == "umandong":            
+
+            a,b,c,d,e,f = db.num_r()
+            b += 1
+            db.num_w(a,b,c,d,e,f)
+            db.area(bar_data)
+            # MO_b.umandong()
+
+
+
+        elif bar_data == "iuidong":         
+            # ser.write(b'iuidong')
+
+            # if ser.in_waiting > 0:
+
+            #     line = ser.readline().decode('utf-8').rstrip()
+
+            #     #print(line)      
+
+            a,b,c,d,e,f = db.num_r()
+            c += 1
+            db.num_w(a,b,c,d,e,f)
+            db.area(bar_data)
+            # MO_b.iuidong()
+
+
 
         elif bar_data == "jidong":
+            # ser.write(b'jidong')
 
-            b += 1
-            db.num(inx,a,b,c,d,e,f)
-            db.area(inx, bar_data)
-            inx += 1
+            # if ser.in_waiting > 0:
+
+            #     line = ser.readline().decode('utf-8').rstrip()
+
+                #print(line)
+
+            a,b,c,d,e,f = db.num_r()
+            d += 1
+            db.num_w(a,b,c,d,e,f)
+            db.area(bar_data)
             # MO_a.jidong()
 
             
 
         elif bar_data == "ingyedong":
 
-            c += 1
-            db.num(inx,a,b,c,d,e,f)
-            db.area(inx, bar_data)
-            inx += 1
+            a,b,c,d,e,f = db.num_r()
+            e += 1
+            db.num_w(a,b,c,d,e,f)
+            db.area(bar_data)
             # MO_a.ingyedong()
 
+
+
+        elif bar_data == "hadong":               
             
+            # ser.write(b'hadong')
 
-        elif bar_data == "umandong":            
+            # if ser.in_waiting > 0:
 
-            d += 1
-            db.num(inx,a,b,c,d,e,f)
-            db.area(inx, bar_data)
-            inx += 1
-            # MO_b.umandong()
+            #     line = ser.readline().decode('utf-8').rstrip()
 
-            
+                #print(line)
 
-        elif bar_data == "yeonmudong":
-      
-            e += 1
-            db.num(inx,a,b,c,d,e,f)
-            db.area(inx, bar_data)
-            inx += 1
-            # MO_b.yeonmudong()
-
-            
-
-        elif bar_data == "iuidong":         
-
+            a,b,c,d,e,f = db.num_r()
             f += 1
-            db.num(inx,a,b,c,d,e,f)
-            db.area(inx, bar_data)
-            inx += 1
-            # MO_b.iuidong()
+            db.num_w(a,b,c,d,e,f)
+            db.area(bar_data)
+            # MO_a.hadong()
 
-
+            
+ 
         else:
-            db.num(inx,a,b,c,d,e,f)
-            db.area(inx, "error")
-            inx += 1
+            a,b,c,d,e,f = db.num_r()
+            db.num_w(a,b,c,d,e,f)
+            db.area("error")
+            
  
 
 barcode_read()
