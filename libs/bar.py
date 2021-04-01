@@ -7,6 +7,8 @@ import libs.data as data
 
 
 class Baread:
+  global db 
+  db = data.db()
     
   def baread(self):
 
@@ -18,7 +20,7 @@ class Baread:
         charset = 'utf8'
         ) 
 
-    self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # 라즈베리파이에서는 매개변수 값 0 =>-1
     self.bar = None
     self.i = 0
 
@@ -47,13 +49,18 @@ class Baread:
       #return self.bar
 
       self.key = cv2.waitKey(1)
-      if self.key == ord('r'):
+      if self.key == ord('2'):
         with self.conn.cursor() as cursor:
           cursor.execute('TRUNCATE test_area')
           cursor.execute('TRUNCATE test_num')
         sys.exit()
-      elif self.key == ord('s'):
+      elif self.key == ord('3'):
         sys.exit()
+      elif self.key == ord('1'):
+        with self.conn.cursor() as cursor:
+          cursor.execute('TRUNCATE test_area')
+          cursor.execute('TRUNCATE test_num')
+          db.num_w(0,0,0,0,0,0)
         # self.i += 1
         # cv2.imwrite('c_%03d.jpg' % self.i, self.img) 
       
