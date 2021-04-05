@@ -20,7 +20,8 @@ class Baread:
         charset = 'utf8'
         ) 
 
-    self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # 라즈베리파이에서는 매개변수 값 0 =>-1
+    self.cap = cv2.VideoCapture(-1)  # 라즈베리파이에서는 매개변수 값 0 =>-1
+                                    #  + cv2.CAP_DSHOW : warn:0 메세지 안뜨게 하는건데 파이에서는 안먹음
     self.bar = None
     self.i = 0
 
@@ -70,4 +71,5 @@ class Baread:
 
 if __name__ == "__main__":
     import sys
-    barcode = baread
+    barcode = Baread()
+    barcode.baread()

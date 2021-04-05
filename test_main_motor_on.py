@@ -4,10 +4,10 @@ import pyzbar.pyzbar as pyzbar
 import cv2
 import libs.bar as bar
 import time
-# import Adafruit_PCA9685
-# import con_A
-# import con_B
-# import serial
+import Adafruit_PCA9685
+import con_A
+import con_B
+import serial
 import pymysql.cursors
 import libs.data as data
 
@@ -33,20 +33,20 @@ f = None
 BAR = bar.Baread()
 db = data.db()
 
-# MO_a = con_A.CON_A()
-# MO_b = con_B.CON_B()
+MO_a = con_A.CON_A()
+MO_b = con_B.CON_B()
 
-#getChar[] = None
+getChar[] = None
 
 def barcode_read():
 
     global a,b,c,d,e,f
 
-    # if __name__ == '__main__':
+    if __name__ == '__main__':
 
-    #     ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+        ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 
-    #     ser.flush()
+        ser.flush()
 
     print("'1' : 초기화 (오류 발생 시)\n'2' : 초기화 및 프로그램 종료 \n'3' : 저장 및 프로그램 종료")
 
@@ -59,19 +59,19 @@ def barcode_read():
 
 
         if bar_data == "yeonmudong":
-            # ser.write(b'yeonmudong')
+            ser.write(b'yeonmudong')
 
-            # if ser.in_waiting > 0:
+            if ser.in_waiting > 0:
 
-            #     line = ser.readline().decode('utf-8').rstrip()
+                line = ser.readline().decode('utf-8').rstrip()
 
-            #     #print(line)   
+                print(line)   
 
             a,b,c,d,e,f = db.num_r()
             a += 1
             db.num_w(a,b,c,d,e,f)
             db.area(bar_data)
-            # MO_b.yeonmudong()
+            MO_b.yeonmudong()
 
 
         elif bar_data == "umandong":            
@@ -80,41 +80,41 @@ def barcode_read():
             b += 1
             db.num_w(a,b,c,d,e,f)
             db.area(bar_data)
-            # MO_b.umandong()
+            MO_b.umandong()
 
 
 
         elif bar_data == "iuidong":         
-            # ser.write(b'iuidong')
+            ser.write(b'iuidong')
 
-            # if ser.in_waiting > 0:
+            if ser.in_waiting > 0:
 
-            #     line = ser.readline().decode('utf-8').rstrip()
+                line = ser.readline().decode('utf-8').rstrip()
 
-            #     #print(line)      
+                print(line)      
 
             a,b,c,d,e,f = db.num_r()
             c += 1
             db.num_w(a,b,c,d,e,f)
             db.area(bar_data)
-            # MO_b.iuidong()
+            MO_b.iuidong()
 
 
 
         elif bar_data == "jidong":
-            # ser.write(b'jidong')
+            ser.write(b'jidong')
 
-            # if ser.in_waiting > 0:
+            if ser.in_waiting > 0:
 
-            #     line = ser.readline().decode('utf-8').rstrip()
+                line = ser.readline().decode('utf-8').rstrip()
 
-                #print(line)
+                print(line)
 
             a,b,c,d,e,f = db.num_r()
             d += 1
             db.num_w(a,b,c,d,e,f)
             db.area(bar_data)
-            # MO_a.jidong()
+            MO_a.jidong()
 
             
 
@@ -124,25 +124,25 @@ def barcode_read():
             e += 1
             db.num_w(a,b,c,d,e,f)
             db.area(bar_data)
-            # MO_a.ingyedong()
+            MO_a.ingyedong()
 
 
 
         elif bar_data == "hadong":               
             
-            # ser.write(b'hadong')
+            ser.write(b'hadong')
 
-            # if ser.in_waiting > 0:
+            if ser.in_waiting > 0:
 
-            #     line = ser.readline().decode('utf-8').rstrip()
+                line = ser.readline().decode('utf-8').rstrip()
 
-                #print(line)
+                print(line)
 
             a,b,c,d,e,f = db.num_r()
             f += 1
             db.num_w(a,b,c,d,e,f)
             db.area(bar_data)
-            # MO_a.hadong()
+            MO_a.hadong()
 
             
  

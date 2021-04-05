@@ -155,5 +155,5 @@ def barcode_read():
 
 barcode_read()
 
-sys.exit(app.exec_())
+# sys.exit(app.exec_())
 conn.close()
