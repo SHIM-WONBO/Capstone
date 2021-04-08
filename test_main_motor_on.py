@@ -5,8 +5,8 @@ import cv2
 import libs.bar as bar
 import time
 import Adafruit_PCA9685
-import con_A
-import con_B
+import libs.con_A as con_A
+import libs.con_B as con_B
 import serial
 import pymysql.cursors
 import libs.data as data
@@ -36,7 +36,7 @@ db = data.db()
 MO_a = con_A.CON_A()
 MO_b = con_B.CON_B()
 
-getChar[] = None
+# getChar[] = None
 
 def barcode_read():
 
