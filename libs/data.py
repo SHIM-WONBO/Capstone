@@ -5,14 +5,15 @@ class db:
     
     def num_w(self, a, b, c, d, e, f):
         conn = pymysql.connect(
-        host = '192.168.0.32', # host name
+        host = '192.168.0.46', # host name
+        port = 3307,
         user = 'root', # user name
-        password = '2222', # password
-        db = 'ddb', # db name
+        password = 'Jmctrls4867)(12', # password
+        db = 'challenger', # db name
         charset = 'utf8'
         )
         with conn.cursor() as cursor:
-            sql = 'INSERT INTO test_num (yeonmudong, umandong, iuidong, jidong, ingyedong, hadong) VALUES (%s, %s, %s, %s, %s, %s)'
+            sql = 'INSERT INTO amount (yeonmudong, umandong, iuidong, jidong, ingyedong, hadong) VALUES (%s, %s, %s, %s, %s, %s)'
             cursor.execute(sql, (a, b, c, d, e, f))
         conn.commit()
 
@@ -21,15 +22,16 @@ class db:
     def num_r(self):
         try:
             conn = pymysql.connect(
-            host = '192.168.0.32', # host name
+            host = '192.168.0.46', # host name
+            port = 3307,
             user = 'root', # user name
-            password = '2222', # password
-            db = 'ddb', # db name
+            password = 'Jmctrls4867)(12', # password
+            db = 'challenger', # db name
             charset = 'utf8'
             )
             
             with conn.cursor() as cursor:    
-                sql = "select * from test_num"
+                sql = "select * from amount"
                 cursor.execute(sql)
             
             rows = cursor.fetchall()
@@ -38,15 +40,16 @@ class db:
         except IndexError:
             db.num_w(self,0,0,0,0,0,0)
             conn = pymysql.connect(
-            host = '192.168.0.32', # host name
+            host = '192.168.0.46', # host name
+            port = 3307,
             user = 'root', # user name
-            password = '2222', # password
-            db = 'ddb', # db name
+            password = 'Jmctrls4867)(12', # password
+            db = 'challenger', # db name
             charset = 'utf8'
             )
             
             with conn.cursor() as cursor:    
-                sql = "select * from test_num"
+                sql = "select * from amount"
                 cursor.execute(sql)
             
             rows = cursor.fetchall()
@@ -57,14 +60,15 @@ class db:
 
     def area(self, bar_data):
         conn = pymysql.connect(
-        host = '192.168.0.32', # host name
+        host = '192.168.0.46', # host name
+        port = 3307,
         user = 'root', # user name
-        password = '2222', # password
-        db = 'ddb', # db name
+        password = 'Jmctrls4867)(12', # password
+        db = 'challenger', # db name
         charset = 'utf8'
         )    
         with conn.cursor() as cursor:
-            sql = 'INSERT INTO test_area (AREA) VALUES (%s)'
+            sql = 'INSERT INTO location (AREA) VALUES (%s)'
             cursor.execute(sql, (bar_data))
         conn.commit()
 

@@ -13,14 +13,15 @@ class Baread:
   def baread(self):
 
     self.conn = pymysql.connect(
-        host = '192.168.0.32', # host name
+        host = '192.168.0.46', # host name
+        port = 3307,
         user = 'root', # user name
-        password = '2222', # password
-        db = 'ddb', # db name
+        password = 'Jmctrls4867)(12', # password
+        db = 'challenger', # db name
         charset = 'utf8'
         ) 
 
-    self.cap = cv2.VideoCapture(-1)  # 라즈베리파이에서는 매개변수 값 0 =>-1
+    self.cap = cv2.VideoCapture(0 + cv2.CAP_DSHOW)  # 라즈베리파이에서는 매개변수 값 0 =>-1
                                     #  + cv2.CAP_DSHOW : warn:0 메세지 안뜨게 하는건데 파이에서는 안먹음
     self.bar = None
     self.i = 0
@@ -52,15 +53,15 @@ class Baread:
       self.key = cv2.waitKey(1)
       if self.key == ord('2'):
         with self.conn.cursor() as cursor:
-          cursor.execute('TRUNCATE test_area')
-          cursor.execute('TRUNCATE test_num')
+          cursor.execute('TRUNCATE location')
+          cursor.execute('TRUNCATE amount')
         sys.exit()
       elif self.key == ord('3'):
         sys.exit()
       elif self.key == ord('1'):
         with self.conn.cursor() as cursor:
-          cursor.execute('TRUNCATE test_area')
-          cursor.execute('TRUNCATE test_num')
+          cursor.execute('TRUNCATE location')
+          cursor.execute('TRUNCATE amount')
           db.num_w(0,0,0,0,0,0)
         # self.i += 1
         # cv2.imwrite('c_%03d.jpg' % self.i, self.img) 

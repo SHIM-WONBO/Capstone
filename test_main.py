@@ -13,10 +13,11 @@ import libs.data as data
 
 # connection 정보
 conn = pymysql.connect(
-host = '192.168.0.32', # host name
+host = '192.168.0.46', # host name
+    port = 3307,
     user = 'root', # user name
-    password = '2222', # password
-    db = 'ddb', # db name
+    password = 'Jmctrls4867)(12', # password
+    db = 'challenger', # db name
     charset = 'utf8'
 )
 
