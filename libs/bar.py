@@ -55,14 +55,18 @@ class Baread:
         with self.conn.cursor() as cursor:
           cursor.execute('TRUNCATE location')
           cursor.execute('TRUNCATE amount')
+          db.num_w(0,0,0,0,0,0)
+          print('프로그램을 종료합니다.')
         sys.exit()
       elif self.key == ord('3'):
+        print('프로그램을 종료합니다.')
         sys.exit()
       elif self.key == ord('1'):
         with self.conn.cursor() as cursor:
           cursor.execute('TRUNCATE location')
           cursor.execute('TRUNCATE amount')
           db.num_w(0,0,0,0,0,0)
+          print('DB 초기화 완료')
         # self.i += 1
         # cv2.imwrite('c_%03d.jpg' % self.i, self.img) 
       
